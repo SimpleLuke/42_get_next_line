@@ -10,14 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/* **************************************************************************
+ * Summary of File:
+ *
+ * 	This file contains helper functions for the get_next_line function.
+ * 	The functions are mostly from libft and/or standard C library.
+ *
+ * **************************************************************************/
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *str);
-size_t	ft_strlcpy(char *dest, const char *src, size_t dest_size);
 char	*ft_strchr(char *str, char c);
+size_t	ft_strlcpy(char *dest, const char *src, size_t dest_size);
 char	*ft_strjoin(char *s1, const char *s2, size_t len);
 char	*ft_strdup(const char *str);
 
+/* **************************************************************************
+ * size_t	ft_strlen(const char *str)
+ *
+ * Summary of the function:
+ * 
+ * 		This function counts the length of the string.
+ * 
+ * Parameters: A pointer to a constant char.
+ *
+ * Return value: The length of the string.
+ * **************************************************************************/
 size_t	ft_strlen(const char *str)
 {
 	int	count;
@@ -28,6 +46,19 @@ size_t	ft_strlen(const char *str)
 	return (count);
 }
 
+/* **************************************************************************
+ * char	*strchr(char *str, char c)
+ *
+ * Summary of the function:
+ * 
+ * 		This function locates the first occurrence of c in the string.
+ * 
+ * Parameters: A pointer to a string character and a charater occurrence.
+ *
+ * Return value: 
+ * 		A pointer to the located character.
+ *		Null if the character does not appear in the string.
+ * **************************************************************************/
 char	*ft_strchr(char *str, char c)
 {
 	while (*str)
@@ -39,6 +70,22 @@ char	*ft_strchr(char *str, char c)
 	return (NULL);
 }
 
+/* **************************************************************************
+ * size_t ft_strlcpy(char *dest, const char *src, size_t dest_size)
+ *
+ * Summary of the function:
+ *
+ * 		This function copies from src to dest for dest_size - 1.
+ * 		It makes sure the dest string always null-terminated.
+ * 
+ * Parameters: 
+ * 		A pointer to the destination string, the source string and
+ * 		the destination size to copy.
+ *
+ * Return value: 
+ *		The total length of the string tried to create.
+ *		The lenth of the src.
+ * **************************************************************************/
 size_t	ft_strlcpy(char *dest, const char *src, size_t dest_size)
 {
 	size_t	src_size;
@@ -58,6 +105,20 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dest_size)
 	return (src_size);
 }
 
+/* **************************************************************************
+ * char *ft_strjoin(char *s1, const char *s2, size_t len)
+ *
+ * Summary of the function:
+ *
+ * 		This function concatenates the s1 and s2.
+ * 		It allocates new memory for the joined string.
+ * 
+ * Parameters: 
+ * 		A pointer to string1 and string2 and the length of string2.
+ *
+ * Return value: 
+ *		A pointer to the first character of the newly joined string.
+ * **************************************************************************/
 char	*ft_strjoin(char *s1, const char *s2, size_t len)
 {
 	int		s1_size;
@@ -77,6 +138,20 @@ char	*ft_strjoin(char *s1, const char *s2, size_t len)
 	return (str);
 }
 
+/* **************************************************************************
+ * char *ft_strdup(const char *str)
+ *
+ * Summary of the function:
+ *
+ * 		This function duplicates the string.
+ * 		It allocates new memory for the duplicated string.
+ * 
+ * Parameters: 
+ * 		A pointer to a string.
+ *
+ * Return value: 
+ *		A pointer to the first character of the newly duplicated string.
+ * **************************************************************************/
 char	*ft_strdup(const char *str)
 {
 	char	*copy;

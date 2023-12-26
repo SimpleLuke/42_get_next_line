@@ -10,17 +10,43 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/* **************************************************************************
+ * Summary of the file:
+ *
+ * 		This function reads the file descriptor and returns a line.
+ * 		A line defines as encounter a newline or EOF.
+ * 		A repeated call reads and returns the next line.
+ * 		It returns NULL when it encounters error or EOF.
+ *
+ * **************************************************************************/
 #include "get_next_line.h"
 
 char		*get_next_line(int fd);
 static int	copy_rest(char buf[], char *line);
 
+/* **************************************************************************
+ * char	*get_next_line(int fd)
+ *
+ * Summary of the function:
+ * 
+ * 		This function reads the file with the BUFFER_SIZE until it
+ * 		encounters a newline or reaches the EOF.
+ * 		Line keeps track to the previous stored string and the newly
+ * 		joined string.
+ * 		Then it copies what after the newline to the static buffer.
+ * 		The static buffer stores the string for the next call.
+ * 		And null-terminating the line before the newline.
+ * 
+ * Parameters: A file descriptor.
+ *
+ * Return value: A pointer to the line.
+ * **************************************************************************/
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1];
 	char		*line;
 	int			read_count;
-	int			to_copy;
+	int			line_count;
 
 	line = ft_strdup(buf);
 	while (!(ft_strchr(line, '\n')))
@@ -36,26 +62,38 @@ char	*get_next_line(int fd)
 		free(line);
 		return (NULL);
 	}
-	to_copy = copy_rest(buf, line);
-	line[to_copy] = '\0';
+	line_count = copy_rest(buf, line);
+	line[line_count] = '\0';
 	return (line);
 }
 
+/* **************************************************************************
+ * static int	copy_rest(char buf[], char *line)
+ *
+ * Summary of the function:
+ * 
+ * 		This function copies what after the newline into buf.
+ * 		And it calculates how many characters before the newline.
+ *
+ * Parameters: The static buffer array and a pointer to the line.
+ *
+ * Return value: A length of the line plus 1 for null-terminator.
+ * **************************************************************************/
 static int	copy_rest(char buf[], char *line)
 {
 	char	*newline;
-	int		to_copy;
+	int		line_count;
 
 	newline = ft_strchr(line, '\n');
 	if (newline != NULL)
 	{
-		to_copy = newline - line + 1;
+		line_count = newline - line + 1;
 		ft_strlcpy(buf, newline + 1, BUFFER_SIZE + 1);
 	}
 	else
 	{
-		to_copy = ft_strlen(line);
+		line_count = ft_strlen(line);
 		ft_strlcpy(buf, "", BUFFER_SIZE + 1);
 	}
-	return (to_copy);
+	return (line_count);
 }
