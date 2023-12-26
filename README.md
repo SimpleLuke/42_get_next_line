@@ -22,6 +22,8 @@ The function returns a single line of strings from a file descriptor.
 
 ```c
 // main.c
+#include <stdio.h>
+#include <fcntl.h>
 #include "get_next_line.h"
 
 int	main(int argc, char **argv)
